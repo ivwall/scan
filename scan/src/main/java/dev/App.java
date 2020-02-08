@@ -27,28 +27,24 @@ public class App {
   public void parseFile(String f) {
     try {
       
+      int r = 0;
+      int c = 0;
+      
       BufferedReader reader = new BufferedReader(new FileReader(f));
       String line = reader.readLine();
+      
       if (line != null) {
+        
         System.out.println(line);
-        
         int xIndex = line.indexOf('x');
-        
-        System.out.println(" xIndex "+xIndex);
-        
-        System.out.println(line.substring(0,xIndex));
-        
+        //System.out.println(" xIndex "+xIndex);
+        //System.out.println(line.substring(0,xIndex));
         String rStr = line.substring(0,xIndex);
-        
-        int r = Integer.parseInt(rStr);
-        
-        System.out.println(" r = "+r);
-        
+        r = Integer.parseInt(rStr);
+        //System.out.println(" r = "+r);
         String cStr = line.substring(xIndex+1,line.length());
-        
-        System.out.println(" cStr "+cStr);
-        
-        int c = Integer.parseInt(cStr);
+        //System.out.println(" cStr "+cStr);
+        c = Integer.parseInt(cStr);
         
         if ( r != c ) {
           System.out.println("need to raise an error here r "+r+" != "+c);
@@ -57,7 +53,17 @@ public class App {
       }
       
       
+      for ( int x=0; x<r; x++ ) {
+        line = reader.readLine();
+        System.out.println(line);
+      }
       
+      
+      line = reader.readLine();
+      while ( line != null ) {
+        System.out.println(line);
+        line = reader.readLine();
+      }
       
     } catch ( Exception ex ) {
       ex.printStackTrace();
