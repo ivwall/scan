@@ -27,6 +27,7 @@ public class App {
   public void parseFile(String f) {
     try {
       
+      
       int r = 0;
       int c = 0;
       
@@ -37,13 +38,9 @@ public class App {
         
         System.out.println(line);
         int xIndex = line.indexOf('x');
-        //System.out.println(" xIndex "+xIndex);
-        //System.out.println(line.substring(0,xIndex));
         String rStr = line.substring(0,xIndex);
         r = Integer.parseInt(rStr);
-        //System.out.println(" r = "+r);
         String cStr = line.substring(xIndex+1,line.length());
-        //System.out.println(" cStr "+cStr);
         c = Integer.parseInt(cStr);
         
         if ( r != c ) {
@@ -52,17 +49,42 @@ public class App {
         
       }
       
+      char[][] matrix = new char[r][c];
       
-      for ( int x=0; x<r; x++ ) {
+      Soup soup = new Soup(r,c);
+      
+      System.out.println(" row.length "+matrix.length);
+      System.out.println(" col.length "+matrix[0].length);
+      
+      int z = 0;
+      
+      for ( int x=0; x<r; x++ ) { // row
         line = reader.readLine();
-        System.out.println(line);
+        for ( int lx=0; lx<line.length(); lx++ ) {  // column
+          if ( line.charAt(lx) != ' ' ) {
+            if (lx==0) {
+            } else {
+              z++;
+            }
+            System.out.print(" ["+x+"]["+z+"]"+line.charAt(lx) );
+            System.out.print(" ");
+            soup.addChar2Matrix(x,z,line.charAt(lx));
+          }
+        }
+        z = 0;
+        System.out.println();
       }
       
+      System.out.println(" row.length "+matrix.length);
+      System.out.println(" col.length "+matrix[0].length);
+      
+      soup.addCharMatrix(matrix);
       
       line = reader.readLine();
       while ( line != null ) {
         System.out.println(line);
         line = reader.readLine();
+        soup.addString(line);
       }
       
     } catch ( Exception ex ) {
@@ -74,6 +96,5 @@ public class App {
   public static void main( String[] args ) {
     App app = new App();
     app.parseFile(app.getFileName());
-  		
   }
 }
