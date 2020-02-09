@@ -17,7 +17,8 @@ public class App {
       Scanner scnr = new Scanner(System.in);
       System.out.print("enter file name> ");
       fName = scnr.next();
-      System.out.println(fName);
+      System.out.println();
+      System.out.println("INPUT");
     } catch ( Exception ex ) {
     }
     return fName;
@@ -72,7 +73,8 @@ public class App {
         z = 0;
       }
       
-      soup.printMatrix();
+      //soup.printMatrix();
+      soup.printMatrixWithSpaces();
       
       // load the words to find ------------------------------------------------
       
@@ -84,9 +86,13 @@ public class App {
       
       //------------------------------------------------------------------------
       
+      soup.displayWordsToFind();
+      
+      System.out.println();
+      
       soup.findTheWords();
       
-      soup.review();
+      soup.displayScanResults();
       
     } catch ( Exception ex ) {
       ex.printStackTrace();

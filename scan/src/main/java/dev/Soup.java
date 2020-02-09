@@ -26,7 +26,6 @@ public class Soup {
   }
   
   public void addChar2Matrix(int r, int c, char x) {
-    //System.out.println("addChar2Matrix r("+r+")c("+c+") = "+x);
     matrix[r][c] = x;
   }
   
@@ -34,6 +33,15 @@ public class Soup {
     for (int r=0; r<matrix.length; r++) {
       for (int c=0; c<matrix[0].length; c++) {
         System.out.print("["+r+"]["+c+"]"+matrix[r][c]+" ");
+      }
+      System.out.println();
+    }
+  }
+  
+  public void printMatrixWithSpaces(){
+    for (int r=0; r<matrix.length; r++) {
+      for (int c=0; c<matrix[0].length; c++) {
+        System.out.print(""+matrix[r][c]+" ");
       }
       System.out.println();
     }
@@ -55,7 +63,7 @@ public class Soup {
   }
   
   public void findTheWords() {
-    System.out.println("findTheWords()");
+    //System.out.println("findTheWords()");
     for (int i=0; i<words.size(); i++) {
       //System.out.println(((WordCoordinates)words.get(i)).getWord()+" "+((WordCoordinates)words.get(i)).getFound());
       
@@ -101,7 +109,8 @@ public class Soup {
         int start = row.indexOf(wc.getWord());
         //System.out.println("start "+start);
         int finish = start + wc.getWord().length();
-        System.out.println(wc.getWord()+" "+r+":"+start+" "+r+":"+finish);
+        //System.out.println(wc.getWord()+" "+r+":"+start+" "+r+":"+finish);
+        wc.setCoordinates(" "+r+":"+start+" "+r+":"+finish);
         //System.out.println("row.contains(wc.getWord()) "+row.contains(wc.getWord()));
         wc.setFound(true);
       }
@@ -122,7 +131,8 @@ public class Soup {
         int start = row.indexOf(wc.getReverseWord());
         //System.out.println("start "+start);
         int finish = start + wc.getReverseWord().length();
-        System.out.println(wc.getReverseWord()+" "+r+":"+(finish-1)+" "+r+":"+start);
+        //System.out.println(wc.getReverseWord()+" "+r+":"+(finish-1)+" "+r+":"+start);
+        wc.setCoordinates(" "+r+":"+(finish-1)+" "+r+":"+start);
         //System.out.println("row.contains(wc.getWord()) "+row.contains(wc.getReverseWord()));
         wc.setFound(true);
       }
@@ -170,11 +180,27 @@ public class Soup {
     return wc;
   }
   
+  public void displayWordsToFind() {
+    for (int i=0; i<words.size(); i++) {
+      System.out.println(((WordCoordinates)words.get(i)).getWord());
+    }
+  }
+  
+  public void displayScanResults() {
+    System.out.println("OUTPUT");
+    for (int i=0; i<words.size(); i++) {
+      System.out.println(((WordCoordinates)words.get(i)).getWord()+" "+((WordCoordinates)words.get(i)).getCoordinates());
+    }
+  }
+  
+  /******
   public void review() {
     //System.out.println("findTheWords()");
     for (int i=0; i<words.size(); i++) {
-      System.out.println(((WordCoordinates)words.get(i)).getWord()+" "+((WordCoordinates)words.get(i)).getFound());
+      //System.out.println(((WordCoordinates)words.get(i)).getWord()+" "+((WordCoordinates)words.get(i)).getFound());
+      System.out.println(((WordCoordinates)words.get(i)).getWord()+" "+((WordCoordinates)words.get(i)).getCoordinates());
     }
   }
+  ********/
 
 }
