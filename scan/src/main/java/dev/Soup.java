@@ -57,61 +57,50 @@ public class Soup {
   }
   
   public void addString(String s) {
-    //System.out.println("soup.addString "+s);
     findThese.add(s);
     words.add(new WordCoordinates(s));
   }
   
   public void findTheWords() {
-    //System.out.println("findTheWords()");
     for (int i=0; i<words.size(); i++) {
-      //System.out.println(((WordCoordinates)words.get(i)).getWord()+" "+((WordCoordinates)words.get(i)).getFound());
       
       if (!((WordCoordinates)words.get(i)).getFound()) {
-        //System.out.println();
         lookHorizontallyForward(words.get(i));
       }
       
       if (!((WordCoordinates)words.get(i)).getFound()) {
-        //System.out.println();
-        //String rWord = new StringBuilder(words.get(i)).reverse().toString();
-        //System.out.println
         lookHorizontallyBackward(words.get(i));
       }
       
       if (!((WordCoordinates)words.get(i)).getFound()) {
-        //System.out.println();
         lookVerticallyForward(words.get(i));
       }
       
       if (!((WordCoordinates)words.get(i)).getFound()) {
-        //System.out.println();
         lookVerticallyBackward(words.get(i));
       }
       
       if (!((WordCoordinates)words.get(i)).getFound()) {
-        //System.out.println();
+        lookDiagonallyForward(words.get(i));
+      }
+      
+      if (!((WordCoordinates)words.get(i)).getFound()) {
+        lookDiagonallyBackward(words.get(i));
       }
       
     }
   }
   
   private WordCoordinates lookHorizontallyForward(WordCoordinates wc) {
-    //System.out.println("lookHorizontallyForward "+wc.getWord());
     
     for (int r=0; r<matrix.length; r++) {
       String row = new String(matrix[r]);
-      //System.out.println(row);
       
       if (row.contains(wc.getWord())) {
-        //System.out.println("r "+r);
         
         int start = row.indexOf(wc.getWord());
-        //System.out.println("start "+start);
         int finish = start + wc.getWord().length();
-        //System.out.println(wc.getWord()+" "+r+":"+start+" "+r+":"+finish);
         wc.setCoordinates(" "+r+":"+start+" "+r+":"+finish);
-        //System.out.println("row.contains(wc.getWord()) "+row.contains(wc.getWord()));
         wc.setFound(true);
       }
     }
@@ -120,20 +109,14 @@ public class Soup {
   }
   
   private WordCoordinates lookHorizontallyBackward(WordCoordinates wc) {
-    //System.out.println("lookHorizontallyBackward "+wc.getReverseWord());
     for (int r=0; r<matrix.length; r++) {
       String row = new String(matrix[r]);
-      //System.out.println(row);
       
       if (row.contains(wc.getReverseWord())) {
-        //System.out.println("r "+r);
         
         int start = row.indexOf(wc.getReverseWord());
-        //System.out.println("start "+start);
         int finish = start + wc.getReverseWord().length();
-        //System.out.println(wc.getReverseWord()+" "+r+":"+(finish-1)+" "+r+":"+start);
         wc.setCoordinates(" "+r+":"+(finish-1)+" "+r+":"+start);
-        //System.out.println("row.contains(wc.getWord()) "+row.contains(wc.getReverseWord()));
         wc.setFound(true);
       }
     }
@@ -141,20 +124,15 @@ public class Soup {
   }
   
   private WordCoordinates lookVerticallyForward(WordCoordinates wc) {
-    //System.out.println("lookVerticallyForward "+wc.getWord());
     
     for (int c=0; c<matrix[0].length; c++) {
       
-      //String col = new String(matrix[0][c]);
-      //System.out.println( col );
       char[] columnOfChars = new char[matrix.length];
       for (int r=0; r<matrix.length; r++) {
         columnOfChars[r] = matrix[r][c];
       }
       
       String columnStr = new String(columnOfChars);
-      
-      //System.out.println("lookVerticallyForward colum["+c+"]"+columnStr);
       
       if (columnStr.contains(wc.getWord())) {
       /*****
@@ -170,15 +148,36 @@ public class Soup {
       ****/
       }
     }
+    return wc;
+  }
+  
+  private WordCoordinates lookVerticallyBackward(WordCoordinates wc) {
+    return wc;
+  }
+
+  private WordCoordinates lookDiagonallyForward(WordCoordinates wc) {
+    System.out.println("lookDiagonallyForward");
+    char[] wordCA = wc.getWord().toCharArray();
+    
+    System.out.println("first char o word "+wordCA[0]);
+    
+    // take the first character
+    // loop through row by row
+    //    if char matches then
+    //       start going diagonally
+    //       if matches if found stop
+    
     
     
     return wc;
   }
   
-  private WordCoordinates lookVerticallyBackward(WordCoordinates wc) {
-    //System.out.println("lookVerticallyBackward "+wc.getWord());
+  private WordCoordinates lookDiagonallyBackward(WordCoordinates wc) {
+    System.out.println("lookDiagonallyBackward");
     return wc;
   }
+  
+  
   
   public void displayWordsToFind() {
     for (int i=0; i<words.size(); i++) {
@@ -193,14 +192,4 @@ public class Soup {
     }
   }
   
-  /******
-  public void review() {
-    //System.out.println("findTheWords()");
-    for (int i=0; i<words.size(); i++) {
-      //System.out.println(((WordCoordinates)words.get(i)).getWord()+" "+((WordCoordinates)words.get(i)).getFound());
-      System.out.println(((WordCoordinates)words.get(i)).getWord()+" "+((WordCoordinates)words.get(i)).getCoordinates());
-    }
-  }
-  ********/
-
 }
