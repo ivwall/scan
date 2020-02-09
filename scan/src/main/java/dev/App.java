@@ -27,7 +27,6 @@ public class App {
   public void parseFile(String f) {
     try {
       
-      
       int r = 0;
       int c = 0;
       
@@ -53,9 +52,6 @@ public class App {
       
       Soup soup = new Soup(r,c);
       
-      System.out.println(" row.length "+matrix.length);
-      System.out.println(" col.length "+matrix[0].length);
-      
       int z = 0;
       
       for ( int x=0; x<r; x++ ) { // row
@@ -66,26 +62,29 @@ public class App {
             } else {
               z++;
             }
-            System.out.print(" ["+x+"]["+z+"]"+line.charAt(lx) );
-            System.out.print(" ");
             soup.addChar2Matrix(x,z,line.charAt(lx));
           }
         }
         z = 0;
-        System.out.println();
       }
       
-      System.out.println(" row.length "+matrix.length);
-      System.out.println(" col.length "+matrix[0].length);
+      //System.out.println(" row.length "+matrix.length);
+      //System.out.println(" col.length "+matrix[0].length);
+      soup.printMatrix();
       
-      soup.addCharMatrix(matrix);
+      //soup.addCharMatrix(matrix);
+      //soup.printMatrix();
       
       line = reader.readLine();
       while ( line != null ) {
-        System.out.println(line);
-        line = reader.readLine();
+        //System.out.println(line);
         soup.addString(line);
+        line = reader.readLine();
       }
+      
+      soup.findTheWords();
+      
+      soup.review();
       
     } catch ( Exception ex ) {
       ex.printStackTrace();
