@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 //import org.apache.commons.io.*;
 
 public class App {
@@ -31,6 +30,9 @@ public class App {
       int c = 0;
       
       BufferedReader reader = new BufferedReader(new FileReader(f));
+      
+      // retreive the matrix dimensions, r, c ----------------------------------
+      
       String line = reader.readLine();
       
       if (line != null) {
@@ -47,6 +49,8 @@ public class App {
         }
         
       }
+      
+      // build the matrix ------------------------------------------------------
       
       char[][] matrix = new char[r][c];
       
@@ -68,19 +72,17 @@ public class App {
         z = 0;
       }
       
-      //System.out.println(" row.length "+matrix.length);
-      //System.out.println(" col.length "+matrix[0].length);
       soup.printMatrix();
       
-      //soup.addCharMatrix(matrix);
-      //soup.printMatrix();
+      // load the words to find ------------------------------------------------
       
       line = reader.readLine();
       while ( line != null ) {
-        //System.out.println(line);
         soup.addString(line);
         line = reader.readLine();
       }
+      
+      //------------------------------------------------------------------------
       
       soup.findTheWords();
       
@@ -91,7 +93,8 @@ public class App {
     }
   }
   
-  
+
+  //----------------------------------------------------------------------------
   public static void main( String[] args ) {
     App app = new App();
     app.parseFile(app.getFileName());
