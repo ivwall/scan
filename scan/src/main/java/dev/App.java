@@ -103,6 +103,7 @@ public class App {
   //----------------------------------------------------------------------------
   public static void main( String[] args ) {
     App app = new App();
-    app.parseFile(app.getFileName());
+    //app.parseFile(app.getFileName());
+    app.parseFile("40x40v1.txt");
   }
 }
